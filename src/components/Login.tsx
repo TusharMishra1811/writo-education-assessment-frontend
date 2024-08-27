@@ -4,6 +4,8 @@ import { useState } from "react";
 import { config, server } from "../constants/constant";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { FaEyeSlash } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -12,6 +14,7 @@ const Login = () => {
     password: "",
   });
   const [loading, setLoading] = useState(false);
+  const [type, setType] = useState("password");
 
   const submitHandler = async (e: any) => {
     e.preventDefault();
@@ -26,6 +29,15 @@ const Login = () => {
       setLoading(false);
     }
   };
+
+  const togglePassword = () => {
+    if (type === "password") {
+      setType("text");
+    } else {
+      setType("password");
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white shadow-lg rounded-lg p-8 flex max-w-5xl">
@@ -53,13 +65,25 @@ const Login = () => {
               value={user.email}
               onChange={(e) => setUser({ ...user, email: e.target.value })}
             />
-            <input
-              type="password"
-              placeholder="Password"
-              className="w-full px-4 py-2 border-b-2 focus:outline-none"
-              value={user.password}
-              onChange={(e) => setUser({ ...user, password: e.target.value })}
-            />
+            <div className="relative w-full">
+              <input
+                type={type}
+                placeholder="Password"
+                className="w-full px-4 py-2 border-b-2 focus:outline-none pr-10" // Add padding-right to avoid text overlap
+                value={user.password}
+                onChange={(e) => setUser({ ...user, password: e.target.value })}
+              />
+              <span
+                onClick={togglePassword}
+                className="absolute inset-y-0 right-0 flex items-center pr-4 cursor-pointer"
+              >
+                {type === "password" ? (
+                  <FaEye className="text-[#3A244A]" />
+                ) : (
+                  <FaEyeSlash className="text-[#3A244A]" />
+                )}
+              </span>
+            </div>
 
             <button
               type="submit"

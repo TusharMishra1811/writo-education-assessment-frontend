@@ -4,6 +4,13 @@ import { useState } from "react";
 import axios from "axios";
 import { config, server } from "../constants/constant";
 import toast from "react-hot-toast";
+import { FaEyeSlash } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
+
+interface VisibilityState {
+  password: boolean;
+  confirmPassword: boolean;
+}
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -16,6 +23,10 @@ const Signup = () => {
     email: "",
   });
   const [loading, setLoading] = useState(false);
+  const [visibility, setVisibility] = useState<VisibilityState>({
+    password: false,
+    confirmPassword: false,
+  });
 
   const submitHandler = async (e: any) => {
     e.preventDefault();
@@ -29,6 +40,13 @@ const Signup = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const togglePassword = (field: keyof VisibilityState) => {
+    setVisibility((prev) => ({
+      ...prev,
+      [field]: !prev[field],
+    }));
   };
 
   return (
@@ -68,18 +86,28 @@ const Signup = () => {
               onChange={(e) => setUser({ ...user, lastName: e.target.value })}
             />
 
-            <div className="relative">
+            <div className="relative w-full">
               <input
-                type="password"
+                type={visibility.password ? "text" : "password"}
                 placeholder="Set Password"
-                className="w-full px-4 py-2 border-b-2 focus:outline-none"
+                className="w-full px-4 py-2 border-b-2 focus:outline-none pr-10"
                 value={user.password}
                 onChange={(e) => setUser({ ...user, password: e.target.value })}
               />
+              <span
+                onClick={() => togglePassword("password")}
+                className="absolute inset-y-0 right-0 flex items-center pr-4 cursor-pointer"
+              >
+                {visibility.password ? (
+                  <FaEyeSlash className="text-[#3A244A]" />
+                ) : (
+                  <FaEye className="text-[#3A244A]" />
+                )}
+              </span>
             </div>
-            <div>
+            <div className="relative w-full">
               <input
-                type="password"
+                type={visibility.confirmPassword ? "text" : "password"}
                 placeholder="Retype Password"
                 className="w-full px-4 py-2 border-b-2 focus:outline-none"
                 value={user.confirmPassword}
@@ -87,6 +115,16 @@ const Signup = () => {
                   setUser({ ...user, confirmPassword: e.target.value })
                 }
               />
+              <span
+                onClick={() => togglePassword("confirmPassword")}
+                className="absolute inset-y-0 right-0 flex items-center pr-4 cursor-pointer"
+              >
+                {visibility.confirmPassword ? (
+                  <FaEyeSlash className="text-[#3A244A]" />
+                ) : (
+                  <FaEye className="text-[#3A244A]" />
+                )}
+              </span>
             </div>
             <div>
               <select
