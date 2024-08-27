@@ -48,15 +48,17 @@ const Login = () => {
             className="object-cover w-96"
           />
         </div>
-        <div className="w-full md:w-1/2 p-6 space-y-6">
-          <h2 className="text-3xl font-extrabold text-[#3A244A]">
-            Fill what we know <span className=" text-[#D72638]">!</span>
-          </h2>
-          <h2 className="text-2xl  text-[#3A244A] underline">
-            <Link to={"/signup"}>
-              Sign <span className=" text-[#D72638] underline">Up</span>
-            </Link>
-          </h2>
+        <div className="w-full md:w-1/2 p-6 space-y-6 border rounded-xl shadow-md">
+          <div className="flex flex-col md:flex-row md:space-x-24 space-y-4 md:space-y-0 items-center">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-[#3A244A]">
+              Fill what we know <span className=" text-[#D72638]">!</span>
+            </h2>
+            <h2 className="text-xl md:text-2xl text-[#3A244A] underline ">
+              <Link to={"/signup"}>
+                Sign <span className=" text-[#D72638] underline">Up</span>
+              </Link>
+            </h2>
+          </div>
           <form className="space-y-4" onSubmit={submitHandler}>
             <input
               type="email"

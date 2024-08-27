@@ -95,7 +95,7 @@ const VerifyOtp: React.FC<OtpFormProps> = ({ length = 4 }) => {
             className="object-cover w-96"
           />
         </div>
-        <div className="w-full md:w-1/2 p-6 space-y-6">
+        <div className="w-full md:w-1/2 p-6 space-y-6 border rounded-lg shadow-lg">
           <h2 className="text-3xl font-extrabold text-[#3A244A]">
             Let us know <span className=" text-[#D72638]">!</span>
           </h2>
