@@ -1,14 +1,15 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.css";
-import Signup from "./components/Signup";
+import Authentication from "./components/Authentication";
 import Home from "./components/Home";
-import VerifyOtp from "./components/VerifyOtp";
 import Login from "./components/Login";
 import ResetPassword from "./components/ResetPassword";
-import { Toaster } from "react-hot-toast";
-import Authentication from "./components/Authentication";
+import Signup from "./components/Signup";
+import VerifyOtp from "./components/VerifyOtp";
 
 function App() {
+  
   return (
     <Router>
       <Toaster />

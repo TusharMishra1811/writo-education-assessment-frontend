@@ -13,6 +13,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+
   const [loading, setLoading] = useState(false);
   const [type, setType] = useState("password");
 

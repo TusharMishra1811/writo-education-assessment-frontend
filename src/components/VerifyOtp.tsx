@@ -1,9 +1,9 @@
 import axios from "axios";
-import signupIllustrator from "../assets/signupIllustrator.png";
 import { useEffect, useRef, useState } from "react";
-import { server } from "../constants/constant";
-import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import signupIllustrator from "../assets/signupIllustrator.png";
+import { server } from "../constants/constant";
 
 interface OtpFormProps {
   length?: number;
@@ -69,11 +69,10 @@ const VerifyOtp: React.FC<OtpFormProps> = ({ length = 4 }) => {
 
   const submitHandler = async (e: any) => {
     e.preventDefault();
+    const modifiedOtp = otp.join("");
+    const verifyOtp = Number(modifiedOtp);
     setLoading(true);
     try {
-      const modifiedOtp = otp.join("");
-      const verifyOtp = Number(modifiedOtp);
-
       await axios.post(`${server}/user/otp-verification`, {
         verifyOtp,
       });
